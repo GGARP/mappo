@@ -103,7 +103,7 @@ def tune_ppo(config):
 if __name__ == '__main__':
     ray.init()
 
-    resources_per_trial =   PlacementGroupFactory([{"CPU": 2, 'GPU': 0.5}] + [{"CPU": 1}] * 2)
+    resources_per_trial =   PlacementGroupFactory([{"CPU": 2, 'GPU': 0.25}] + [{"CPU": 1}] * 2)
 
     tuner = Tuner(
         tune.with_resources(tune_ppo, resources_per_trial),
