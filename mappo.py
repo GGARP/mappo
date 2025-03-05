@@ -22,10 +22,6 @@ from ray.tune.registry import register_env
 from config import env_configs
 from env import env_creator
 
-def my_trial_dirname_creator(trial):
-    # Use a short name, for example just the trial ID
-    return f"trial_{trial.trial_id}"
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
 
@@ -107,7 +103,7 @@ def tune_ppo(config):
 if __name__ == '__main__':
     ray.init()
 
-    resources_per_trial =   PlacementGroupFactory([{"CPU": 1, 'GPU': 0.25}] + [{"CPU": 1}] * 1)
+    resources_per_trial =   PlacementGroupFactory([{"CPU": 2, 'GPU': 0.5}] + [{"CPU": 1}] * 2)
 
     tuner = Tuner(
         tune.with_resources(tune_ppo, resources_per_trial),
