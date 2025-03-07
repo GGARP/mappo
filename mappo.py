@@ -55,7 +55,7 @@ def tune_ppo(config):
     """
     Tune the PPO trainer
     """
-    env_config_name = "increasing_demand"
+    env_config_name = "cyclical_demand"
     env_config = env_configs[env_config_name]
     num_episodes = 100
 
@@ -125,7 +125,7 @@ if __name__ == '__main__':
         },
         run_config=ray.air. RunConfig(
     storage_path=os.path.join(os.getcwd(), "..", "results"),
-    name="MAPPO_inc",
+    name="MAPPO_cyc",
 ),
     )
 
