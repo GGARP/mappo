@@ -8,7 +8,7 @@ def gradual_increase(t, D0=5, r=1):
     """Linearly increasing demand over time."""
     return D0 + r * t
 
-def cyclical_demand(t, A=5, T=12, C=6):
+def cyclical_demand(t, A=5, T=12, C=5):
     """Sinusoidal (seasonal) demand fluctuations."""
     return int(round(A * math.sin(2 * math.pi * t / T) + C))
 
@@ -67,7 +67,6 @@ env_configs = {
         'backlog_costs': [1, 1, 1, 1],
         'holding_costs': [1, 1, 1, 1],
         'stage_names': ['retailer', 'wholesaler', 'distributor', 'manufacturer'],
-        'comm_size': 4,
     },
     'variable_demand': {
         'num_stages': 4,
@@ -82,7 +81,6 @@ env_configs = {
         'backlog_costs': [1, 1, 1, 1],
         'holding_costs': [1, 1, 1, 1],
         'stage_names': ['retailer', 'wholesaler', 'distributor', 'manufacturer'],
-        'comm_size': 4,
     },
     'larger_demand': {
         'num_stages': 4,
@@ -97,7 +95,6 @@ env_configs = {
         'backlog_costs': [1, 1, 1, 1],
         'holding_costs': [1, 1, 1, 1],
         'stage_names': ['retailer', 'wholesaler', 'distributor', 'manufacturer'],
-        'comm_size': 4,
     },
     'seasonal_demand': {
         'num_stages': 4,
@@ -112,7 +109,6 @@ env_configs = {
         'backlog_costs': [1, 1, 1, 1],
         'holding_costs': [1, 1, 1, 1],
         'stage_names': ['retailer', 'wholesaler', 'distributor', 'manufacturer'],
-        'comm_size': 4,
     },
     'normal_demand': {
         'num_stages': 4,
@@ -127,7 +123,6 @@ env_configs = {
         'backlog_costs': [1, 1, 1, 1],
         'holding_costs': [1, 1, 1, 1],
         'stage_names': ['retailer', 'wholesaler', 'distributor', 'manufacturer'],
-        'comm_size': 4,
     },
     'increasing_demand': {
         'num_stages': 4,
@@ -142,21 +137,19 @@ env_configs = {
         'backlog_costs': [1, 1, 1, 1],
         'holding_costs': [1, 1, 1, 1],
         'stage_names': ['retailer', 'wholesaler', 'distributor', 'manufacturer'],
-        'comm_size': 4,
     },
     'cyclical_demand': {
         'num_stages': 4,
         'num_periods': 12,
         'init_inventories': [17, 17, 17, 17],
         'lead_times': [2, 2, 2, 2],
-        'demand_fn': lambda t: cyclical_demand(t, A=5, T=12, C=6),
+        'demand_fn': lambda t: cyclical_demand(t, A=5, T=12, C=5),
         'prod_capacities': [20, 25, 30, 35],
         'sale_prices': [5, 5, 5, 5],
         'order_costs': [5, 5, 5, 5],
         'backlog_costs': [1, 1, 1, 1],
         'holding_costs': [1, 1, 1, 1],
         'stage_names': ['retailer', 'wholesaler', 'distributor', 'manufacturer'],
-        'comm_size': 4,
     },
     'demand_shock': {
         'num_stages': 4,
@@ -170,7 +163,6 @@ env_configs = {
         'backlog_costs': [1, 1, 1, 1],
         'holding_costs': [1, 1, 1, 1],
         'stage_names': ['retailer', 'wholesaler', 'distributor', 'manufacturer'],
-        'comm_size': 4,
     },
     'stochastic_demand': {
         'num_stages': 4,
@@ -185,7 +177,6 @@ env_configs = {
         'backlog_costs': [1, 1, 1, 1],
         'holding_costs': [1, 1, 1, 1],
         'stage_names': ['retailer', 'wholesaler', 'distributor', 'manufacturer'],
-        'comm_size': 4,
     },
 }
 
