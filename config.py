@@ -147,7 +147,7 @@ env_configs = {
     'cyclical_demand': {
         'num_stages': 4,
         'num_periods': 12,
-        'init_inventories': [15, 15, 15, 15],
+        'init_inventories': [17, 17, 17, 17],
         'lead_times': [2, 2, 2, 2],
         'demand_fn': lambda t: cyclical_demand(t, A=5, T=12, C=6),
         'prod_capacities': [20, 25, 30, 35],
