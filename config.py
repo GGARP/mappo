@@ -18,6 +18,30 @@ def demand_shock(t, D_base=5, S=8, t0=8, delta_t=2):
         return D_base + S
     else:
         return D_base 
+class INARDemandGenerator:
+    def __init__(self, alpha=0.5, lam=2, n_periods=13):
+        self.alpha = alpha
+        self.lam = lam
+        self.n_periods = n_periods
+        self.generate_new_series()
+
+    def generate_new_series(self):
+        """Regenerates demand each time it's called."""
+        X = np.zeros(self.n_periods, dtype=int)
+        X[0] = np.random.poisson(self.lam)
+        for t in range(1, self.n_periods):
+            survivors = np.random.binomial(X[t-1], self.alpha)
+            new_arrivals = np.random.poisson(self.lam)
+            X[t] = survivors + new_arrivals
+        self.series = X
+
+    def __call__(self, t):
+        """Return demand at t, regenerating per episode."""
+        if t == 0:  
+            self.generate_new_series()  
+        return self.series[t]
+
+
 
 def simulate_inar1(alpha, lam, n_periods):
     """
@@ -37,9 +61,6 @@ def simulate_inar1(alpha, lam, n_periods):
         X[t] = survivors + new_arrivals
     return X
 
-# Generate the INAR(1) demand series using the global RNG:
-INARdemand_series = simulate_inar1(alpha=0.5, lam=2, n_periods=13)
-print("INAR demand series:", INARdemand_series)
 
 env_configs = {
     'two_agent': {
@@ -170,7 +191,7 @@ env_configs = {
         'init_inventories': [20, 20, 20, 20],
         'lead_times': [2, 2, 2, 2],
         # Here we use the pre-generated INARdemand_series.
-        'demand_fn': lambda t: INARdemand_series[t],
+        'demand_fn': INARDemandGenerator(),
         'prod_capacities': [20, 20, 20, 20],
         'sale_prices': [5, 5, 5, 5],
         'order_costs': [5, 5, 5, 5],
