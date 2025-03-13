@@ -55,7 +55,7 @@ def tune_ppo(config):
     """
     Tune the PPO trainer
     """
-    env_config_name = "stochastic_demand"
+    env_config_name = "variable_demand"
     env_config = env_configs[env_config_name]
     num_episodes = 100
 
